@@ -7,6 +7,8 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 
+import solver
+
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
@@ -20,6 +22,7 @@ wait(1000)
 ev3.speaker.beep()
 # Initialize position
 arm.run_until_stalled(-200, then=Stop.BRAKE, duty_limit=None)  
+arm.reset_angle(0)
 
 # Initilize turn table motor
 motor = Motor(Port.C)
@@ -61,17 +64,31 @@ pos = 0
 def rotate_left():
     global pos 
     pos += 270
-    motor.run_target(500, pos, then=Stop.BRAKE, wait=True)
+    motor.run_target(1000, pos, then=Stop.BRAKE, wait=True)
 
 # R rotate function (from Srinjana's POV)
 def rotate_right():
     global pos 
     pos -= 270
-    motor.run_target(500, pos, then=Stop.BRAKE, wait=True)
+    motor.run_target(1000, pos, then=Stop.BRAKE, wait=True)
+    
+def turn_left():
+    global pos
+    pos += 330
+    motor.run_target(1000, pos, then=Stop.BRAKE, wait=True)
+    pos -= 60
+    motor.run_target(1000, pos, then=Stop.BRAKE, wait=True)
+
+def turn_right():
+    global pos
+    pos -= 330
+    motor.run_target(1000, pos, then=Stop.BRAKE, wait=True)
+    pos += 60
+    motor.run_target(1000, pos, then=Stop.BRAKE, wait=True)
 
 def extend_color_sensor():
     COLOR_SENSOR_DEGREES_PER_SEC = 300
-    color_sensor_arm.run_target(COLOR_SENSOR_DEGREES_PER_SEC, -75, then=Stop.HOLD, wait=True)
+    color_sensor_arm.run_target(COLOR_SENSOR_DEGREES_PER_SEC, -70, then=Stop.HOLD, wait=True)
 
 def retract_color_sensor():
     COLOR_SENSOR_DEGREES_PER_SEC = 300
@@ -110,7 +127,7 @@ def scan_face():
         color, (r,g,b, intensity) = read_current_color()
         print(color, (r,g,b, intensity))
         temp_array.append(color)
-        wait(500)
+        wait(100)
         rotate_left()
     return temp_array
         
@@ -188,10 +205,49 @@ def scan_cube():
         arr[key[key_counter]] = item
         key_counter += 1
     retract_color_sensor()
+    
+    rotate_left()
+    flip()
+    flip()
+    arm.run_until_stalled(-200, then=Stop.BRAKE, duty_limit=None)  
 
 scan_cube()
 print(arr)
 
+state = solver.convert_color_arr_to_16_state(arr)
+if state is None:
+    print("Scan error!")
+    exit(0)
+print("got state: ", state)
+
+sol = solver.get_solution_for_state(state)
+print("solution: ", sol)
+
+for move in sol:
+    if move == "z'":
+        flip()
+    elif move[0] == "y":
+        if len(move) == 1:
+            arm.run_until_stalled(-200, then=Stop.BRAKE, duty_limit=None)  
+            rotate_left()
+        else:
+            arm.run_until_stalled(-200, then=Stop.BRAKE, duty_limit=None)  
+            rotate_right()
+    elif move[0] == "D":
+        if len(move) == 1:
+            arm.run_target(200, 125, then=Stop.BRAKE, wait=True)
+            turn_right()
+        elif move[1] == "'":
+            arm.run_target(200, 125, then=Stop.BRAKE, wait=True)  
+            turn_left()
+        elif move[1] == "2":
+            arm.run_target(200, 125, then=Stop.BRAKE, wait=True)  
+            turn_left()
+            turn_left()
+
+arm.run_until_stalled(-200, then=Stop.BRAKE, duty_limit=None)  
+motor.run_target(1000, 1080 * 4, wait=False)
+ev3.speaker.play_file("champions.wav")
 
 
 # Harshith's code of rotating left 4 times from my POV
