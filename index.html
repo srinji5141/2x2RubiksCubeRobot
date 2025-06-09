@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EV3 Rubik's Cube Solver</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    section {
+      padding: 2rem 1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #007acc;
+      margin-bottom: 0.5rem;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin: 1rem 0;
+    }
+
+    .video {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .footer {
+      background: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>2x2 Rubik's Cube Solving Robot</h1>
+    <p>Built with LEGO EV3 for our engineering class project</p>
+  </header>
+
+  <section>
+    <h2>🔧 Overview</h2>
+    <p>This project represents an innovative fusion of robotics, computer vision, and puzzle-solving algorithms. Our team developed an autonomous robot capable of solving a 2x2 Rubik's Cube using LEGO EV3 components and motors. The project demonstrates practical applications of engineering principles, programming logic, and mechanical design.</p>
+
+    <p>At its core, our robot employs a sophisticated system that combines hardware and software components:</p>
+    <ul>
+      <li><strong>Hardware Integration:</strong> Custom-built gripper mechanism with precise motor control for cube manipulation, integrated color sensors for state detection, and a robust chassis design that ensures stable operation.</li>
+      <li><strong>Software Architecture:</strong> Advanced algorithms for cube state recognition, solution computation using optimized solving methods, and real-time motor control for accurate cube rotations.</li>
+      <li><strong>Key Features:</strong> Autonomous operation, reliable color detection, efficient solving algorithm, and precise mechanical movements.</li>
+    </ul>
+
+    <p>The project's success lies in its ability to bridge theoretical concepts with practical implementation. We faced and overcame several challenges, including:</p>
+    <ul>
+      <li>Designing a reliable gripping mechanism that could handle the cube without damaging it</li>
+      <li>Implementing accurate color detection in various lighting conditions</li>
+      <li>Optimizing the solving algorithm for speed and efficiency</li>
+      <li>Ensuring precise motor control for consistent cube rotations</li>
+    </ul>
+
+    <p>Through this project, we've demonstrated how modern robotics can transform complex puzzle-solving into an automated process. Our robot not only showcases the practical application of engineering principles but also serves as a testament to the power of combining hardware innovation with algorithmic thinking. The successful implementation of this system opens doors for further exploration in automated puzzle-solving and educational robotics applications.</p>
+
+    <h2>🧠 How It Works</h2>
+    <ul>
+      <li>For each face of the vube, the color sensor detects the color of each square and maps it to its respective position.</li>
+      <li>The cube state is converted into a digital representation</li>
+      <li>We use a massive hash table to store the cube state and its solution. Once we have the cube state, we simple look up the solution in the hash table.</li>
+      <li>The solution is then converted into actionable items for the robot.</li>
+      <li>Pybricks is then used to make the robot perform the moves in the solution.</li>
+    </ul>
+
+    <img src="your-image.jpg" alt="Rubik's Cube Solver Robot">
+
+    <h2>📹 Demo Video</h2>
+    <div class="video">
+      <!-- Replace the YouTube link with your own demo if available -->
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <h2>💻 Technologies Used</h2>
+    <ul>
+      <li>LEGO EV3 Mindstorms (motors, sensors, bricks)</li>
+      <li>EV3-G / Python (EV3dev or Pybricks)</li>
+      <li>Basic computer vision logic for scanning colors</li>
+    </ul>
+
+    <h2>👨‍💻 Our Team</h2>
+    <p>Built by [Your Name] and team for [Course Name] at [School Name]</p>
+
+    <h2>📁 Source Code</h2>
+    <p>Check out the full code and build instructions on our <a href="https://github.com/yourusername/rubik-ev3" target="_blank">GitHub repository</a>.</p>
+  </section>
+
+  <div class="footer">
+    <p>&copy; 2025 Rubik's Solver Team | LEGO® is a trademark of the LEGO Group</p>
+  </div>
+</body>
+</html>
