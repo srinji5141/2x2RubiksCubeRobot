@@ -79,3 +79,9 @@ This project is for educational purposes only.
 
 - The robot requires calibration for optimal color detection
 - Solution times may vary based on cube state
+
+## References
+
+1. Wu, E. (2024). Massive Table Generator for Rubik's Cube. GitHub: [https://github.com/ericwu17/Massive-Table-Generator/](https://github.com/ericwu17/Massive-Table-Generator/)
+
+2. Gilday, D. MindCub3r for LEGO EV3. [https://mindcuber.com/mindcub3r/mindcub3r.html](https://mindcuber.com/mindcub3r/mindcub3r.html)
